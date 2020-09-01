@@ -2,7 +2,7 @@
 
 This minecraft mod is for counting blocks in a certain space.
 
-Usage : /blockcounter countblocks <firstPositionX> <firstPositionY> <firstPositionZ> <secondPositionX> <secondPositionY> <secondPositionZ> [optionalBlockFilter]
+Usage : `/blockcounter countblocks <firstPositionX> <firstPositionY> <firstPositionZ> <secondPositionX> <secondPositionY> <secondPositionZ> [optionalBlockFilter]`
 
 It is recommended for now to not use this in a too big area.
 
