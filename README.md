@@ -1,4 +1,4 @@
-# Block Counter Mod
+ # Block Counter Mod
 
 This minecraft mod is for counting blocks in a certain space.
 
