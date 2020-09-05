@@ -1,3 +1,214 @@
+Build: 1.16.2-33.0.37 - Thu Sep 03 16:37:38 GMT 2020
+	cpw:
+		Fix compiler issue in eclipse properly
+		
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.16.2-33.0.36 - Thu Sep 03 12:40:52 GMT 2020
+	sciwhiz12:
+		Fix crash caused by previous commit (#7298)
+
+=========
+Build: 1.16.2-33.0.35 - Thu Sep 03 04:15:27 GMT 2020
+	lex:
+		Dirty casting hacks to fix eclipse compiler inference issue. I'm sorry cpw.
+
+=========
+Build: 1.16.2-33.0.34 - Thu Sep 03 03:38:16 GMT 2020
+	tterrag:
+		Fix broken ExistingFileHelper import
+		
+		Add licenses to some new files
+
+	tterrag:
+		Add validation via resources for tag providers (#7271)
+		
+		BREAKING CHANGE: Moved ExistingFileHelper to common package
+		Remove various workarounds from forge tag providers
+
+=========
+Build: 1.16.2-33.0.32 - Tue Sep 01 18:36:21 GMT 2020
+	cpw:
+		Move the "modloading" thread activity onto _our_ worker pool. It turns out that the vanilla worker pool can deadlock during stitching if it's insufficiently large, if modloader "waitForTransition" is also a worker member of that pool.
+		
+		Closes #7293 (to reproduce issue easily, modify Util.func_240979_a_ and change the values in the MathHelper.clamp call). I've verified that 3 and below for "max" cause the problem. (I didn't test a whole range of values, just sufficient to reproduce problem and verify fix). Note that setting it to zero (and using the "direct executor" that's inaccessible in normal operation) works as well with this fix.
+		
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.16.2-33.0.31 - Tue Sep 01 02:27:07 GMT 2020
+	cpw:
+		Fix missed debugging code. Read the config from the config.
+		
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.16.2-33.0.30 - Tue Sep 01 01:31:57 GMT 2020
+	cpw:
+		Revert "Shut down all other mod handlers if the loading cycle errors. This prevents other mods from throwing errors and being blamed for initial cause. This is a temporary hack until cpw re-writes the mod event dispatcher."
+		
+		This reverts commit 7592bbe8
+		
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+	cpw:
+		Revert "Properly shutdown FMLModContainer's event bus when an error in a lifecycle event is detected."
+		
+		This reverts commit 30bad1e2
+		
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+	cpw:
+		Redo event dispatch, removes a bunch of nonsense, and tries to integrate with the vanilla CF system where possible
+		
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+	cpw:
+		Fix up all the things. Removed SidedProvider because it served no real purpose anymore.
+		
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+	cpw:
+		Fix up slight registry change and other 1.16.2 stuffs.
+		
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.16.2-33.0.23 - Sun Aug 30 23:05:24 GMT 2020
+	ichttt:
+		Add particle culling (#6981)
+
+=========
+Build: 1.16.2-33.0.22 - Wed Aug 26 16:50:02 GMT 2020
+	lex:
+		Wrap vanilla's 'default' biome registry in ForgeRegistry.
+		This should allow registering mod dimensions like in 1.16.1, while the data driven system is fleshed out.
+
+=========
+Build: 1.16.2-33.0.21 - Tue Aug 25 01:11:38 GMT 2020
+	David Quintana:
+		Clarify in the LazyOptional which methods carry the lazyness over to the returned value and which don't. (#6750)
+		
+		For consistency, this meant making a few changes:
+		- Renamed the existing lazy mapping method to lazyMap, to indicate that it doesn't run the mapping immediately.
+		- Added a new implementation of map(), which returns Optional<T>, and resolves the value in the process.
+		- Changed filter() to return Optional, since there's no way to filter lazily.
+		- Added a new method resolve(), which helps convert the custom LazyOptional class into a standard Optional, for use
+		with library methods that expect Optional<T>.
+		
+		* Update License headers.
+
+=========
+Build: 1.16.2-33.0.20 - Fri Aug 21 21:27:21 GMT 2020
+	sciwhiz12:
+		Add user-friendly exceptions when config loading fails (#7214)
+
+=========
+Build: 1.16.2-33.0.19 - Fri Aug 21 18:53:46 GMT 2020
+	dev:
+		Replace EntityHeight event with EntitySize event (#6858)
+
+=========
+Build: 1.16.2-33.0.18 - Fri Aug 21 18:38:31 GMT 2020
+	davide2910:
+		[1.16] ForgeEventFactory#canCreateFluidSource reintroduced (#7181)
+
+=========
+Build:  - Fri Aug 21 18:31:19 GMT 2020
+	cyborgmas18:
+		Cleanup and expand Forge tags (#7004)
+
+=========
+Build: 1.16.2-33.0.16 - Fri Aug 21 18:25:49 GMT 2020
+	sciwhiz12:
+		Fix modproperties property in mods.toml causing exception (#7192)
+
+=========
+Build: 1.16.2-33.0.15 - Fri Aug 21 18:15:53 GMT 2020
+	me:
+		Log info about server list warning (#7209)
+		
+		Make it easier to figure out what mods are missing or have to be marked as client/server side only.
+
+=========
+Build: 1.16.2-33.0.14 - Fri Aug 21 18:06:47 GMT 2020
+	goto.minecraft:
+		Fix ItemStack#isDamageable is not calling Item#isDamagable (#7221)
+
+=========
+Build: 1.16.2-33.0.13 - Fri Aug 21 17:48:58 GMT 2020
+	diesieben07:
+		Improve performance and cleanup code for DelegatingResourcePack (#7228)
+
+=========
+Build: 1.16.2-33.0.12 - Fri Aug 21 17:29:33 GMT 2020
+	cyborgmas18:
+		Fix small logging issues with loading pack.png for mods (#7265)
+
+=========
+Build: 1.16.2-33.0.11 - Fri Aug 21 17:23:30 GMT 2020
+	diesieben07:
+		Fix config iteration order (#7230)
+
+=========
+Build: 1.16.2-33.0.10 - Fri Aug 21 09:47:23 GMT 2020
+	lex:
+		Cleanup Forge's build script, fix some unneeded patches.
+		Add checkExcscheckAll tasks.
+
+=========
+Build: 1.16.2-33.0.9 - Fri Aug 21 04:35:17 GMT 2020
+	championash5357:
+		Readding DifficultyChangeEvent hooks (#7240)
+
+=========
+Build: 1.16.2-33.0.8 - Fri Aug 21 04:29:10 GMT 2020
+	malte0811:
+		Improve startup time by caching the manifest data for mod jars (#7256)
+
+=========
+Build: 1.16.2-33.0.7 - Wed Aug 19 05:47:46 GMT 2020
+	Yunus1903:
+		Removed HarvestDropsEvent (#7193)
+
+=========
+Build: 1.16.2-33.0.6 - Wed Aug 19 05:22:45 GMT 2020
+	cyborgmas18:
+		Remove forge optional tags in favor of Vanilla's new system. (#7246)
+
+=========
+Build: 1.16.2-33.0.5 - Fri Aug 14 19:05:15 GMT 2020
+	lex:
+		Fix creating nether portals.
+
+	lex:
+		New method for creating modded tag references, fix connecting to vanilla servers.
+
+=========
+Build: 1.16.2-33.0.3 - Fri Aug 14 02:17:01 GMT 2020
+	43609023+spnda:
+		Print mod file name on InvalidModFileException (#7241)
+
+=========
+Build: 1.16.2-33.0.2 - Thu Aug 13 19:26:22 GMT 2020
+	cyborgmas18:
+		Fix server connection, misapplied patch (#7245)
+
+	Yunus1903:
+		Updated MDK and README for 1.16.2 (#7243)
+
+=========
+Build: 1.16.2-33.0.0 - Thu Aug 13 07:37:04 GMT 2020
+	lex:
+		Initial 1.16.2 Update
+
+=========
+Build: 1.16.1-32.0.108 - Sun Aug 09 20:05:01 GMT 2020
+	David Quintana:
+		Fix ModelRegistryEvent firing every time resources reload instead of just once.
+
+=========
 Build: 1.16.1-32.0.107 - Sat Aug 08 01:00:42 GMT 2020
 	David Quintana:
 		Move ModelRegistryEvent invocation to when the model loading is about to start.
