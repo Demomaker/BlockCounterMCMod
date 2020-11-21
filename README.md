@@ -9,3 +9,5 @@ Here is a video showcasing the mod :
 [![Youtube video showcasing the mod](https://img.youtube.com/vi/ndBpqKyCrzQ/0.jpg)](https://www.youtube.com/watch?v=ndBpqKyCrzQ)
 
 ### [More info](https://github.com/Demomaker/BlockCounterMCMod/wiki)
+
+### [You can now also get the mod using CurseForge!](https://www.curseforge.com/minecraft/mc-mods/block-counter-mod)
