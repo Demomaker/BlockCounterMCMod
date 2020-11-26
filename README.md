@@ -1,5 +1,5 @@
  # Block Counter Mod
-![GitHub license](https://img.shields.io/github/license/Demomaker/BlockCounterMCMod?style=plastic)
+[![GitHub license](https://img.shields.io/github/license/Demomaker/BlockCounterMCMod?style=plastic)](https://github.com/Demomaker/BlockCounterMCMod/blob/master/LICENSE.txt)
 [![GitHub all releases](https://img.shields.io/github/downloads/Demomaker/BlockCounterMCMod/total?style=plastic)](https://github.com/Demomaker/BlockCounterMCMod/releases)
 ## EN
 
