@@ -1,6 +1,6 @@
  # Block Counter Mod
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
-[![Github all releases](https://img.shields.io/github/downloads/Naereen/StrapDown.js/total.svg)](https://GitHub.com/Naereen/StrapDown.js/releases/)
+![GitHub license](https://img.shields.io/github/license/Demomaker/BlockCounterMCMod?style=plastic)
+![GitHub all releases](https://img.shields.io/github/downloads/Demomaker/BlockCounterMCMod/total?style=plastic)
 ## EN
 
 This minecraft mod is for counting blocks in a certain space.
