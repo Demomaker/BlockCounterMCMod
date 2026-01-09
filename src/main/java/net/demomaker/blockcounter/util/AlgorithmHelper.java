@@ -31,15 +31,14 @@ public class AlgorithmHelper {
     };
 
     public static ItemName GetItemNameFromBlock(Block block) {
-        TranslationTextComponent text = new TranslationTextComponent(block.getTranslationKey());
-        return new ItemName(text.getString());
+        return GetItemNameFromBlockName(block.getDescriptionId());
     }
 
     public static ItemName GetItemNameFromAir(BlockPos blockPos) {
         ItemName itemName = GetItemNameFromBlock(GetBlockAt(blockPos));
         String airName = getAirName();
         if(itemName.getString().equals(airName)) {
-            Fluid fluid = serverWorld.getBlockState(blockPos).getFluidState().getFluid();
+            Fluid fluid = serverWorld.getBlockState(blockPos).getFluidState().getType();
             itemName = getFluidName(fluid);
         }
 
@@ -61,7 +60,12 @@ public class AlgorithmHelper {
     }
 
     private static String getAirName() {
-        TranslationTextComponent airText = new TranslationTextComponent(Blocks.AIR.getTranslationKey());
+        TranslationTextComponent airText = new TranslationTextComponent(Blocks.AIR.getDescriptionId());
         return airText.getString();
+    }
+
+    public static ItemName GetItemNameFromBlockName(String blockName) {
+        TranslationTextComponent text = new TranslationTextComponent(blockName);
+        return new ItemName(text.getString());
     }
 }
