@@ -3,12 +3,10 @@ package net.demomaker.blockcounter.common;
 import net.demomaker.blockcounter.util.AlgorithmHelper;
 import net.minecraft.block.Block;
 import net.minecraft.command.arguments.ItemInput;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Algorithm {
     public String GetStringContainingAllBlockCountsFor(BlockPos firstPosition, BlockPos secondPosition, ItemInput itemInput)
@@ -16,7 +14,7 @@ public class Algorithm {
         String item = "";
         if(itemInput != null)
         {
-            item = itemInput.getItem().getName().getString();
+            item = AlgorithmHelper.GetItemNameFromBlockName(Block.byItem(itemInput.getItem()).getDescriptionId()).getString();
         }
         Map<String, Integer> localBlockCounts = GetAmountOfBlocks(firstPosition, secondPosition, item);
         StringBuilder returnString = new StringBuilder();
@@ -32,7 +30,7 @@ public class Algorithm {
                 + "===================\n";
     }
 
-    public Map<String, Integer> GetAmountOfBlocks(BlockPos firstPosition,BlockPos secondPosition, String blockName)
+    public Map<String, Integer> GetAmountOfBlocks(BlockPos firstPosition, BlockPos secondPosition, String blockName)
     {
         Map<String, Integer> blockCounts = new HashMap<String, Integer>();
         int total = 0;
@@ -69,7 +67,7 @@ public class Algorithm {
                     }
                     ItemName currentItemName = getItemNameAt(currentBlockPos);
 
-                    if((blockName.equals("") || currentItemName.equals(blockName)))
+                    if((blockName.isEmpty() || currentItemName.equals(blockName)))
                     {
                         total++;
                         blockCoordinatesToIgnore.addAll(ignoreCoordinatesOfCoupledBlock(currentBlockPos, currentItemName, blockCoordinatesToIgnore));

@@ -11,6 +11,7 @@ import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.BlockPosArgument;
 import net.minecraft.command.arguments.ItemArgument;
 import net.minecraft.command.arguments.ItemInput;
+import net.minecraft.command.arguments.LocationInput;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
@@ -33,10 +34,10 @@ public class CommandCountBlocks implements Command<CommandSource> {
         return Commands.literal(COMMAND_NAME)
                 .then(argument(FIRST_POSITION_ARGUMENT_NAME, BlockPosArgument.blockPos())
                         .then(argument(SECOND_POSITION_ARGUMENT_NAME, BlockPosArgument.blockPos())
-                                .requires(cs -> cs.hasPermissionLevel(0))
+                                .requires(cs -> cs.hasPermission(0))
                                 .executes(CMD_WITHOUT_ITEM)
                                 .then(argument(BLOCK_ARGUMENT_NAME, ItemArgument.item())
-                                        .requires(cs -> cs.hasPermissionLevel(0))
+                                        .requires(cs -> cs.hasPermission(0))
                                         .executes(new CommandCountBlocks())
                                 )
                         )
@@ -47,11 +48,13 @@ public class CommandCountBlocks implements Command<CommandSource> {
 
     @Override
     public int run(CommandContext<CommandSource> context) throws CommandSyntaxException {
-        BlockPos firstPosition = BlockPosArgument.getBlockPos(context, FIRST_POSITION_ARGUMENT_NAME);
-        BlockPos secondPosition = BlockPosArgument.getBlockPos(context, SECOND_POSITION_ARGUMENT_NAME);
-        ItemInput item = ItemArgument.getItem(context, BLOCK_ARGUMENT_NAME);
-        AlgorithmHelper.SetServerWorld(context.getSource().getServer().getWorld(World.field_234918_g_));
-        context.getSource().sendFeedback(new StringTextComponent("Number Of Blocks : \n" + ALGORITHM.GetStringContainingAllBlockCountsFor(firstPosition, secondPosition, item)), false);
+        LocationInput firstPositionLocationInput = context.getArgument(CommandCountBlocks.FIRST_POSITION_ARGUMENT_NAME, LocationInput.class);
+        LocationInput secondPositionLocationInput = context.getArgument(CommandCountBlocks.SECOND_POSITION_ARGUMENT_NAME, LocationInput.class);
+        BlockPos firstPosition = firstPositionLocationInput.getBlockPos(context.getSource());
+        BlockPos secondPosition = secondPositionLocationInput.getBlockPos(context.getSource());
+        ItemInput item = context.getArgument(BLOCK_ARGUMENT_NAME, ItemInput.class);
+        AlgorithmHelper.SetServerWorld(context.getSource().getServer().overworld());
+        context.getSource().sendSuccess(new StringTextComponent(ALGORITHM.GetStringContainingAllBlockCountsFor(firstPosition, secondPosition, item)), false);
         return 0;
     }
 }
