@@ -5,6 +5,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.demomaker.blockcounter.util.AlgorithmHelper;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.BlockPosArgument;
@@ -12,6 +13,7 @@ import net.minecraft.command.arguments.ItemArgument;
 import net.minecraft.command.arguments.ItemInput;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.World;
 
 import static com.mojang.brigadier.arguments.IntegerArgumentType.integer;
 import static net.minecraft.command.Commands.argument;
@@ -48,6 +50,7 @@ public class CommandCountBlocks implements Command<CommandSource> {
         BlockPos firstPosition = BlockPosArgument.getBlockPos(context, FIRST_POSITION_ARGUMENT_NAME);
         BlockPos secondPosition = BlockPosArgument.getBlockPos(context, SECOND_POSITION_ARGUMENT_NAME);
         ItemInput item = ItemArgument.getItem(context, BLOCK_ARGUMENT_NAME);
+        AlgorithmHelper.SetServerWorld(context.getSource().getServer().getWorld(World.field_234918_g_));
         context.getSource().sendFeedback(new StringTextComponent("Number Of Blocks : \n" + ALGORITHM.GetStringContainingAllBlockCountsFor(firstPosition, secondPosition, item)), false);
         return 0;
     }
