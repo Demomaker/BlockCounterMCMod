@@ -1,6 +1,7 @@
 package net.demomaker.blockcounter.common;
 
 import net.demomaker.blockcounter.util.AlgorithmHelper;
+import net.demomaker.blockcounter.util.MessageHelper;
 import net.minecraft.block.Block;
 import net.minecraft.command.arguments.ItemInput;
 import net.minecraft.item.ItemStack;
@@ -22,12 +23,10 @@ public class Algorithm {
             returnString.append(key).append(" : ").append(localBlockCounts.get(key).toString()).append(" \n");
         }
 
-        return "===[BlockCounter]===\n"
-                + "Number Of Blocks : " + "\n"
+        return MessageHelper.wrapWithModDecorator("Number Of Blocks : " + "\n"
                 + returnString
                 + "-------------------\n"
-                + "Total : " + AlgorithmHelper.GetTotal() + "\n"
-                + "===================\n";
+                + "Total : " + AlgorithmHelper.GetTotal() + "\n");
     }
 
     public Map<String, Integer> GetAmountOfBlocks(BlockPos firstPosition, BlockPos secondPosition, String blockName)

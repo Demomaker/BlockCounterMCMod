@@ -30,7 +30,7 @@ public class CommandCountBlocks implements Command<CommandSource> {
     public static final String SECOND_POSITION_ARGUMENT_NAME = "second_position";
     public static final String BLOCK_ARGUMENT_NAME = "block_name";
 
-    public static ArgumentBuilder<CommandSource, ?> register(CommandDispatcher<CommandSource> dispatcher) {
+    public static ArgumentBuilder<CommandSource, ?> register() {
         return Commands.literal(COMMAND_NAME)
                 .then(argument(FIRST_POSITION_ARGUMENT_NAME, BlockPosArgument.blockPos())
                         .then(argument(SECOND_POSITION_ARGUMENT_NAME, BlockPosArgument.blockPos())
