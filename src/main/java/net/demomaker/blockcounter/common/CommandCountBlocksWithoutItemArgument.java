@@ -3,24 +3,29 @@ package net.demomaker.blockcounter.common;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.demomaker.blockcounter.common.CommandCountBlocks;
 import net.demomaker.blockcounter.util.AlgorithmHelper;
-import net.minecraft.command.CommandSource;
-import net.minecraft.command.arguments.BlockPosArgument;
-import net.minecraft.command.arguments.LocationInput;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
+import net.demomaker.blockcounter.util.MessageHelper;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
+import net.minecraft.commands.arguments.coordinates.WorldCoordinates;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.TextComponent;
 
-public class CommandCountBlocksWithoutItemArgument implements Command<CommandSource> {
+public class CommandCountBlocksWithoutItemArgument implements Command<CommandSourceStack> {
     @Override
-    public int run(CommandContext<CommandSource> context) throws CommandSyntaxException {
-        LocationInput firstPositionLocationInput = context.getArgument(CommandCountBlocks.FIRST_POSITION_ARGUMENT_NAME, LocationInput.class);
-        LocationInput secondPositionLocationInput = context.getArgument(CommandCountBlocks.SECOND_POSITION_ARGUMENT_NAME, LocationInput.class);
-        BlockPos firstPosition = firstPositionLocationInput.getBlockPos(context.getSource());
-        BlockPos secondPosition = secondPositionLocationInput.getBlockPos(context.getSource());
-        AlgorithmHelper.SetServerWorld(context.getSource().getServer().overworld());
-        context.getSource().sendSuccess(new StringTextComponent(CommandCountBlocks.ALGORITHM.GetStringContainingAllBlockCountsFor(firstPosition, secondPosition, null)), false);
+    public int run(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        try {
+            WorldCoordinates firstPositionLocationInput = context.getArgument(CommandCountBlocks.FIRST_POSITION_ARGUMENT_NAME, WorldCoordinates.class);
+            WorldCoordinates secondPositionLocationInput = context.getArgument(CommandCountBlocks.SECOND_POSITION_ARGUMENT_NAME, WorldCoordinates.class);
+            BlockPos firstPosition = firstPositionLocationInput.getBlockPos(context.getSource());
+            BlockPos secondPosition = secondPositionLocationInput.getBlockPos(context.getSource());
+            AlgorithmHelper.SetServerWorld(context.getSource().getLevel());
+            context.getSource().sendSuccess(new TextComponent(CommandCountBlocks.ALGORITHM.GetStringContainingAllBlockCountsFor(firstPosition, secondPosition, null)), false);
+        }
+        catch (Exception e) {
+            context.getSource().sendFailure(new TextComponent(MessageHelper.wrapWithModDecorator(e.getMessage())));
+        }
+
         return 0;
     }
 }

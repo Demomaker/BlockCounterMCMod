@@ -2,10 +2,9 @@ package net.demomaker.blockcounter.common;
 
 import net.demomaker.blockcounter.util.AlgorithmHelper;
 import net.demomaker.blockcounter.util.MessageHelper;
-import net.minecraft.block.Block;
-import net.minecraft.command.arguments.ItemInput;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.commands.arguments.item.ItemInput;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.Block;
 
 import java.util.*;
 

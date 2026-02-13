@@ -1,20 +1,20 @@
 package net.demomaker.blockcounter.util;
 
 import net.demomaker.blockcounter.common.ItemName;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 
 public class AlgorithmHelper {
-    private static ServerWorld serverWorld;
+    private static ServerLevel serverWorld;
     private static int total;
-    public static void SetServerWorld(ServerWorld serverWorld) {
+    public static void SetServerWorld(ServerLevel serverWorld) {
         AlgorithmHelper.serverWorld = serverWorld;
     }
 
@@ -55,17 +55,17 @@ public class AlgorithmHelper {
     public static ItemName getFluidName(Fluid fluid) {
         ResourceLocation fluidOriginalKey = Registry.FLUID.getKey(fluid);
         String fluidKey = "fluid." + fluidOriginalKey.getNamespace() + "." + fluidOriginalKey.getPath();
-        String fluidName = new TranslationTextComponent(fluidKey).getString();
+        String fluidName = new TranslatableComponent(fluidKey).getString();
         return new ItemName(fluidName);
     }
 
     private static String getAirName() {
-        TranslationTextComponent airText = new TranslationTextComponent(Blocks.AIR.getDescriptionId());
+        TranslatableComponent airText = new TranslatableComponent(Blocks.AIR.getDescriptionId());
         return airText.getString();
     }
 
     public static ItemName GetItemNameFromBlockName(String blockName) {
-        TranslationTextComponent text = new TranslationTextComponent(blockName);
+        TranslatableComponent text = new TranslatableComponent(blockName);
         return new ItemName(text.getString());
     }
 }
